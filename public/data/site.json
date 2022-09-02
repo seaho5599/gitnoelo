@@ -1,0 +1,107 @@
+[
+  {
+      "menuType":"S",
+      "titleurl":"#",
+      "title":"SHOP",
+      "subarr": [
+          {
+          "suburl":"#",
+          "subtitle":"ALL PRODUCTS"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"NEWBORN"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"BABY"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"FAMILY"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"BATH GOODS"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"PRESENTS"
+          }]
+  },
+  {
+      "menuType":"S",
+      "titleurl":"#",
+      "title":"ABOUT",
+      "subarr": [
+          {
+          "suburl":"#",
+          "subtitle":"BRAND STORY"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"WHO WE ARE"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"MAKE A WISH"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"PRESS"
+      }]
+  },
+  {
+      "menuType":"S",
+      "titleurl":"#",
+      "title":"TRUST",
+      "subarr": [
+          {
+          "suburl":"#",
+          "subtitle":"FOOD GRADE"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"PENTACERA<sup>TM</sup>"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"BABY SKINCARE"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"CERTIFICATIONS"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"INGREDIENT"
+      }]
+  },
+  {   
+      "menuType":"A",
+      "titleurl":"#",
+      "title":"STOCKISTS",
+      "subarr":[]
+  },
+  {     
+      "menuType":"A",
+      "titleurl":"#",
+      "title":"REVIEW",
+      "subarr":[]
+  },
+  {
+      "menuType":"S",
+      "titleurl":"#",
+      "title":"BENEFITS",
+      "subarr": [
+          {
+          "suburl":"#",
+          "subtitle":"EVENTS"
+      },
+          {
+          "suburl":"#",
+          "subtitle":"MEMBERS"
+      }]
+  }
+
+]

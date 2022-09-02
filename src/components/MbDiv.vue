@@ -9,7 +9,7 @@
       <div class="mb-wrap">
 
         <ul class="mb-menu">
-          <li v-for="(item, index) in mbmenu" v-bind:key="index">
+          <li v-for="(item, index) in mbMenu" v-bind:key="index">
             <span class="mb-mainmenu" v-if="item.menuType =='S'">{{item.mainText}}</span>
             <a v-bind:href="item.mainLink" class="mb-mainmenu" v-if="item.menuType =='A'">{{item.mainText}}</a>
             <ul class="mb-submenu" v-if="item.menuType == 'S'">
@@ -28,17 +28,21 @@
 
 <script>
   import {
-    onMounted
+    computed,
+    onUpdated
   } from 'vue'
   import $ from 'jquery';
+  import { useStore } from 'vuex'
 
   export default {
-    props:['mbmenu'],
+    
 
     setup() {
-
+      const store = useStore();
+      const mbMenu = computed(()=>store.getters.getMbMenuData)
+      store.dispatch('fetchMenu')  
       // 화면에 html 의 구성이 완료되면
-      onMounted(() => {
+      onUpdated(() => {
         // 모바일 메뉴
         let mb_div = $('.mb-div');
         // 모바일 보기 버튼 기능
@@ -94,7 +98,7 @@
 
 
       return {
-
+        mbMenu
       }
     }
 

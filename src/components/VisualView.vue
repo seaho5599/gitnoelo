@@ -1,9 +1,15 @@
 <template>
   <section class="visual">
-    <Swiper :modules="modules" :autoplay="{
+    <Swiper 
+        :modules="modules" 
+        :autoplay="{
         delay: 2000,
         disableOnIteraction: false,
-        }" :loop="true" @swiper="onSwiper" @slideChange="onSlideChange" class="sw-visual">
+        }" 
+        :loop="true" 
+        @swiper="onSwiper" 
+        @slideChange="onSlideChange" 
+        class="sw-visual">
       <swiper-slide class="swiper-slide" v-for="(item ,index) in slideData" :key="index">
         <VisualList :vimg="item.vimg" :vtitle="item.vtitle" :vtxt="item.vtxt" :vbt="item.vbt" :vlink="item.vlink" />
       </swiper-slide>
@@ -62,7 +68,7 @@
           vtxt: '국내 최초 100% <br />식품 그레이드 성분',
           vbt: 'SHOP'
         }
-      ]
+      ];
       const onSwiper = (swiper) => {
         console.log(swiper);
       };

@@ -2,47 +2,12 @@
    <section class="sitemap">
       <div class="inner">
         <ul class="sitemap-menu clearfix">
-          <li>
-            <a href="#">SHOP</a>
+          <li v-for="(item, index) in siteMenu" :key="index">
+            <a :href="item.titleurl">{{item.title}}</a>
             <ul class="sitemap-submenu">
-              <li><a href="#">ALL PRODUCTS</a></li>
-              <li><a href="#">NEWBORN</a></li>
-              <li><a href="#">BABY</a></li>
-              <li><a href="#">FAMILY</a></li>
-              <li><a href="#">BATH GOODS</a></li>
-              <li><a href="#">PRESENTS</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">ABOUT</a>
-            <ul class="sitemap-submenu">
-              <li><a href="#">BRAND STORY</a></li>
-              <li><a href="#">WHO WE ARE</a></li>
-              <li><a href="#">MAKE A WISH</a></li>
-              <li><a href="#">PRESS</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">TRUST</a>
-            <ul class="sitemap-submenu">
-              <li><a href="#">FOOD GRADE</a></li>
-              <li><a href="#">PENTACERA<sup>TM</sup></a></li>
-              <li><a href="#">BABY SKINCARE</a></li>
-              <li><a href="#">CERTIFICATIONS</a></li>
-              <li><a href="#">INGREDIENT</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">STOCKISTS</a>
-          </li>
-          <li>
-            <a href="#">REVIEW</a>
-          </li>
-          <li>
-            <a href="#">BENEFITS</a>
-            <ul class="sitemap-submenu">
-              <li><a href="#">EVENTS</a></li>
-              <li><a href="#">MEMBERS</a></li>
+              <li v-for="(subitem, subindex) in item.subarr" :key="subindex">
+                <a :href="subitem.suburl" v-html="subitem.subtitle"></a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -51,8 +16,17 @@
 </template>
 
 <script>
+import { useStore } from 'vuex'
+import {computed} from 'vue'
 export default {
-
+  setup(){
+    const store = useStore();
+    const siteMenu = computed(() => store.getters.getSiteMenu)
+    store.dispatch('fetchSite')
+    return{
+      siteMenu
+    }
+  }
 }
 </script>
 

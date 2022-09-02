@@ -1,7 +1,8 @@
 <template>
   <!-- 모바일 메뉴 -->
+  <ModalView />
   <div>
-    <MbDiv v-bind:mbmenu="mbMenuData" />
+    <MbDiv />
 
     <!-- 배너영역 -->
     <BannerView />
@@ -16,51 +17,17 @@
           <a href="#" class="logo"></a>
           <div class="gnb">
             <ul class="menu clearfix">
-              <li>
-                <a href="#">SHOP</a>
-                <ul class="submenu">
-                  <li><a href="#">ALL PRODUCTS</a></li>
-                  <li><a href="#">NEWBORN</a></li>
-                  <li><a href="#">BABY</a></li>
-                  <li><a href="#">FAMILY</a></li>
-                  <li><a href="#">BATH GOODS</a></li>
-                  <li><a href="#">PRESENTS</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#">ABOUT</a>
-                <ul class="submenu">
-                  <li><a href="#">BRAND STORY</a></li>
-                  <li><a href="#">WHO WE ARE</a></li>
-                  <li><a href="#">MAKE A WISH</a></li>
-                  <li><a href="#">PRESS</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#">TRUST</a>
-                <ul class="submenu">
-                  <li><a href="#">FOOD GRADE</a></li>
-                  <li><a href="#">PENTACERA<sup>TM</sup></a></li>
-                  <li><a href="#">BABY SKINCARE</a></li>
-                  <li><a href="#">CERTIFICATIONS</a></li>
-                  <li><a href="#">INGREDIENT</a></li>
-                </ul>
-              </li>
-              <li>
-                <a href="#">STOCKISTS</a>
-              </li>
-              <li>
-                <a href="#">REVIEW</a>
-              </li>
-              <li>
-                <a href="#">BENEFITS</a>
-                <ul class="submenu">
-                  <li><a href="#">EVENTS</a></li>
-                  <li><a href="#">MEMBERS</a></li>
+              <li v-for="(item, index) in gnbMenu" :key="index">
+                <a :href="item.titleurl" >{{item.title}}</a>
+                <ul class="submenu" v-if="item.menuType == 'S'">
+                  <li v-for="(subitem, subindex) in item.subarr" :key="subindex">
+                    <a :href="subitem.suburl" v-html="subitem.subtitle"></a>
+                  </li>
                 </ul>
               </li>
             </ul>
           </div>
+
           <div class="member">
             <ul class="member-list clearfix">
               <li>
@@ -128,16 +95,20 @@
 
 <script>
   import {
-    onMounted
+    onMounted,
+    computed
   } from 'vue';
   import $ from 'jquery';
-
+  import {
+    useStore
+  } from 'vuex'
 
   import MbDiv from '@/components/MbDiv.vue';
   import BannerView from '@/components/BannerView.vue';
   import VisualView from '@/components/VisualView.vue';
   import CategoryView from '@/components/CategoryView.vue';
   import SitemapView from '@/components/SitemapView.vue';
+  import ModalView from '@/components/ModalView.vue';
 
 
   export default {
@@ -147,9 +118,13 @@
       BannerView,
       VisualView,
       CategoryView,
-      SitemapView
+      SitemapView,
+      ModalView
     },
     setup() {
+      let store = useStore();
+      let gnbMenu = computed(() => store.getters.getSiteMenu)
+      store.dispatch('fetchSite')
       onMounted(() => {
 
         let header = $('.header');
@@ -168,113 +143,9 @@
           }
         });
       })
-      let mbMenuData = [{
-          menuType: 'S',
-          mainText: 'SHOP',
-          mainLink: '',
-          subArr: [{
-              link: '#',
-              title: 'ALL PRODUCTS'
-            },
-            {
-              link: '#',
-              title: 'NEWBORN'
-            },
-            {
-              link: '#',
-              title: 'BABY'
-            },
-            {
-              link: '#',
-              title: 'FAMILY'
-            },
-            {
-              link: '#',
-              title: 'BATH GOODS'
-            },
-            {
-              link: '#',
-              title: 'PRESENTS'
-            }
-          ],
-        },
-        {
-          menuType: 'S',
-          mainText: 'ABOUT',
-          mainLink: '',
-          subArr: [{
-              link: '#',
-              title: 'RAND STORY'
-            },
-            {
-              link: '#',
-              title: 'WHO WE ARE'
-            },
-            {
-              link: '#',
-              title: 'MAKE A WISH'
-            },
-            {
-              link: '#',
-              title: 'PRESS'
-            }
-          ],
-        },
-        {
-          menuType: 'S',
-          mainText: 'TRUST',
-          mainLink: '',
-          subArr: [{
-              link: '#',
-              title: 'FOOD GRADE'
-            },
-            {
-              link: '#',
-              title: 'PENTACERA™'
-            },
-            {
-              link: '#',
-              title: 'BABY SKINCARE'
-            },
-            {
-              link: '#',
-              title: 'CERTIFICATIONS'
-            },
-            {
-              link: '#',
-              title: 'INGREDIENT'
-            }
-          ],
-        },
-        {
-          menuType: 'A',
-          mainText: 'STOCKISTS',
-          mainLink: 'a.html',
-          subArr: [],
-        },
-        {
-          menuType: 'A',
-          mainText: 'REVIEW',
-          mainLink: 'b.html',
-          subArr: [],
-        },
-        {
-          menuType: 'S',
-          mainText: 'BENEFITS',
-          mainLink: '',
-          subArr: [{
-              link: '#',
-              title: 'EVENTS'
-            },
-            {
-              link: '#',
-              title: 'MEMBERS'
-            }
-          ],
-        }
-      ];
+
       return {
-        mbMenuData,
+        gnbMenu
       }
     }
   }
@@ -339,8 +210,6 @@
     background: #1ABC9C;
     color: #fff;
   }
-
-  #app {}
 
 
   /* 공통클래스 */
@@ -455,7 +324,6 @@
   .header .inner .gnb .menu>li .submenu li {
     padding: 17px 0;
   }
-
   .header .inner .gnb .menu>li .submenu li a {
     font-size: 13px;
     white-space: nowrap;
