@@ -40,7 +40,7 @@
     setup() {
       const store = useStore();
       const mbMenu = computed(()=>store.getters.getMbMenuData)
-      store.dispatch('fetchMenu')  
+  
       // 화면에 html 의 구성이 완료되면
       onUpdated(() => {
         // 모바일 메뉴
