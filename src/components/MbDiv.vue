@@ -13,10 +13,10 @@
             <span class="mb-mainmenu" v-if="item.menuType =='S'">{{item.mainText}}</span>
             <a v-bind:href="item.mainLink" class="mb-mainmenu" v-if="item.menuType =='A'">{{item.mainText}}</a>
             <ul class="mb-submenu" v-if="item.menuType == 'S'">
-              
+
               <li v-for="(subitem,subindex) in item.subArr" v-bind:key="subindex">
                 <a v-bind:href="subitem.link">{{subitem.title}}</a>
-                </li>
+              </li>
 
             </ul>
           </li>
@@ -32,15 +32,17 @@
     onUpdated
   } from 'vue'
   import $ from 'jquery';
-  import { useStore } from 'vuex'
+  import {
+    useStore
+  } from 'vuex'
 
   export default {
-    
+
 
     setup() {
       const store = useStore();
-      const mbMenu = computed(()=>store.getters.getMbMenuData)
-  
+      const mbMenu = computed(() => store.getters.getMbMenuData)
+
       // 화면에 html 의 구성이 완료되면
       onUpdated(() => {
         // 모바일 메뉴
@@ -82,6 +84,11 @@
               // 서브메뉴 펼치기
               mb_menu_li.eq(index).find('.mb-submenu').show();
             }
+          });
+          // 모바일 닫기 버튼 기능
+          let mb_close = $('.mb-close');
+          mb_close.click(function () {
+            mb_div.hide();
           });
         });
         // window 너비 체크
