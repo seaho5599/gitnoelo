@@ -6,14 +6,14 @@ const state = {
 }
 const actions = {
   fetchMenu({commit}){
-    axios.get('/data/menu.json')
+    axios.get('./data/menu.json')
     .then(response => {
       commit('MENU_INIT', response.data)
     })
     .catch(err => console.log(err))
   },
   fetchSite({commit}){
-    axios.get('/data/site.json')
+    axios.get('./data/site.json')
     .then(response => {
       commit('SITE_INIT', response.data)
     })
